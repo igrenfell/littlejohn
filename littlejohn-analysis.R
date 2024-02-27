@@ -34,10 +34,12 @@ for(i in 1:nxl)
   #datatimes <- as_datetime(dmat[,1])
   dt <- diff(dfsub[,1])
   freq <- as.numeric(dt[1])
-  tcdat <- dfsub[,2:7]
+  dfnames <- names(dfsub)
+  tc_cols <- grep("tc.", dfnames)
+  tcdat <- dfsub[,tc_cols]
   
-  outlistsub <- vector("list", 6)
-  for(curtc in 1:dim(tcdat)[2])
+  outlistsub <- vector("list", length(tc_cols))
+  for(curtc in 1:length(tc_cols))
   {
     tcvec <- tcdat[,curtc]
     tcvec[tcvec < 0] <- 0
